@@ -4,11 +4,44 @@
     <title>Zapatopia</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
+ <body>
+
+   <% if current_user %>
+
+  <div class="logout, topnav">
+   <a><%= link_to "Log out", logout_path, method: "delete" %></a>
+   <a><%= link_to "🛒", 'cart' %></a>
+   <a><%= link_to "About", 'about' %></a>
+   <a><%= link_to "(Sell)", 'sell' %></a>
+   <b><%= link_to "Logo", 'logo' %></b>
+   <b>Hello, <%= current_user.last_name %>!</b>
+   <b><%= current_user.email %></b>
+   <center>
+   <p><input type="search" placeholder="Search.."></p>
+   </center>
+  </div>
+
+
+<% else %>
+
+<div class="topnav">
+   <a><%= link_to "🛒", 'cart' %></a>
+   <a><%= link_to "Login", 'login' %></a>
+   <a><%= link_to "Signup", 'signup' %></a>
+   <a><%= link_to "About", 'about' %></a>
+   <a><%= link_to "(Sell)", 'sell' %></a>
+   <b><%= link_to "Logo", 'logo' %></b>
+   <center>
+   <p><input type="search" placeholder="Search.."></p>
+   </center>
+</div>
+
+<% end %>
+
+   <%= yield %>
   </body>
 </html>
